@@ -1,7 +1,7 @@
 package ru.gozerov.domain.news.models
 
 data class NewsApi(
-    val source: NewsSource,
+    val source: String?,
     val author: String?,
     val title: String,
     val description: String?,

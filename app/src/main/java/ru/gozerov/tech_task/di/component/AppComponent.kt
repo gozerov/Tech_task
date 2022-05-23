@@ -1,6 +1,7 @@
 package ru.gozerov.tech_task.di.component
 
 import android.content.Context
+import dagger.BindsInstance
 import dagger.Component
 import ru.gozerov.tech_task.di.modules.AppModule
 import javax.inject.Singleton
@@ -13,6 +14,7 @@ interface AppComponent {
     interface Builder {
         fun build(): AppComponent
 
+        @BindsInstance
         fun context(context: Context): Builder
 
     }

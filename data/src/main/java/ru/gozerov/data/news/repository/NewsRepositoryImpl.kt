@@ -3,11 +3,10 @@ package ru.gozerov.data.news.repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import ru.gozerov.data.news.cache.NewsDao
-import ru.gozerov.data.news.models.DataArticleSource
+import ru.gozerov.data.news.models.CacheNewsApi
 import ru.gozerov.data.news.models.DataNewsApi
 import ru.gozerov.data.news.remote.NewsRemoteService
 import ru.gozerov.domain.news.models.NewsApi
-import ru.gozerov.domain.news.models.NewsSource
 import ru.gozerov.domain.news.models.SimpleNews
 import ru.gozerov.domain.news.repository.NewsRepository
 import javax.inject.Inject
@@ -20,7 +19,7 @@ class NewsRepositoryImpl @Inject constructor (
     override suspend fun fetchSimpleNews(): Flow<List<SimpleNews>> {
         return if (newsDao.getNewsCount()==0 || newsDao.getNews()!=newsRemoteService.fetchNews().articles) {
             val news = newsRemoteService.fetchNews().articles
-            newsDao.initializeDatabase(news)
+            newsDao.initializeDatabase(news.toCacheNewsApi())
             flowOf(news.toListSimpleNews())
         } else {
             flowOf(newsRemoteService.fetchNews().articles.toListSimpleNews())
@@ -34,6 +33,20 @@ class NewsRepositoryImpl @Inject constructor (
 
     //Mappers
 
+    private fun List<DataNewsApi>.toCacheNewsApi() = this.map { news ->
+        CacheNewsApi(
+            id = news.id,
+            source = news.source.name,
+            author = news.author,
+            title = news.title,
+            description = news.description,
+            url = news.url,
+            urlToImage = news.urlToImage,
+            publishedAt = news.publishedAt,
+            content = news.content
+        )
+    }
+
     private fun List<DataNewsApi>.toListSimpleNews() = this.map { newsApi ->
         SimpleNews(
             title = newsApi.title,
@@ -41,13 +54,8 @@ class NewsRepositoryImpl @Inject constructor (
         )
     }
 
-    private fun DataArticleSource.toNewsSource() = NewsSource(
-        id = this.id,
-        name = this.name
-    )
-
-    private fun DataNewsApi.toNewsApi() = NewsApi(
-        source = this.source.toNewsSource(),
+    private fun CacheNewsApi.toNewsApi() = NewsApi(
+        source = this.source,
         author = this.author,
         title = this.title,
         description = this.description,

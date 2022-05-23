@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import ru.gozerov.data.news.models.DataNewsApi
+import ru.gozerov.data.news.models.CacheNewsApi
 
-@Database(entities = [DataNewsApi::class], version = 1)
+@Database(entities = [CacheNewsApi::class], version = 1)
 abstract class NewsDatabase: RoomDatabase() {
 
     abstract val newsDao: NewsDao

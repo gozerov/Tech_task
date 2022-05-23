@@ -4,19 +4,19 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-import ru.gozerov.data.news.models.DataNewsApi
+import ru.gozerov.data.news.models.CacheNewsApi
 
 @Dao
 interface NewsDao {
 
     @Query("SELECT * FROM news_db")
-    fun getNews(): Flow<DataNewsApi>
+    fun getNews(): Flow<CacheNewsApi>
 
     @Query("SELECT * FROM news_db WHERE id = :id")
-    suspend fun getNewsById(id: Int): DataNewsApi
+    suspend fun getNewsById(id: Int): CacheNewsApi
 
     @Insert
-    suspend fun initializeDatabase(news: List<DataNewsApi>)
+    suspend fun initializeDatabase(news: List<CacheNewsApi>)
 
     @Query("SELECT count(*) FROM news_db")
     suspend fun getNewsCount(): Int

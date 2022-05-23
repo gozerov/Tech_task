@@ -1,8 +1,15 @@
 package ru.gozerov.data.news.models
 
-data class DataNewsApi (
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import ru.gozerov.data.news.cache.NewsDatabase
+
+@Entity(tableName = NewsDatabase.name)
+data class CacheNewsApi(
+    @PrimaryKey
     val id: Int,
-    val source: DataArticleSource,
+
+    val source: String,
     val author: String?,
     val title: String,
     val description: String?,
@@ -10,4 +17,4 @@ data class DataNewsApi (
     val urlToImage: String?,
     val publishedAt: String,
     val content: String
-    )
+)
