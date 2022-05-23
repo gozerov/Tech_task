@@ -4,11 +4,14 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import ru.gozerov.tech_task.di.modules.AppModule
+import ru.gozerov.tech_task.screens.news_list.NewsListFragment
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [AppModule::class])
 interface AppComponent {
+
+    fun inject(newsListFragment: NewsListFragment)
 
     @Component.Builder
     interface Builder {

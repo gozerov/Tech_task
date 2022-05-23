@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.news_list.NewsListFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/newsListRecyclerView"
+        android:layout_gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="12dp"
+        tools:listitem="@layout/item_simple_news"/>
+
+    <ProgressBar
+        android:id="@+id/newsListProgress"
+        tools:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+    <include
+        tools:visibility="invisible"
+        android:id="@+id/state_error"
+        layout="@layout/layout_state_error"/>
+
+</FrameLayout>

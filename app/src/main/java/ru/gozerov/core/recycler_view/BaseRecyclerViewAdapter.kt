@@ -18,7 +18,7 @@ abstract class BaseRecyclerViewAdapter<T>: RecyclerView.Adapter<BaseViewHolder<T
 
 }
 
-fun <T>RecyclerView.setupAdapter(
+fun <T>RecyclerView.setupRecyclerView(
     adapter: BaseRecyclerViewAdapter<T>,
     data: List<T>,
     layoutManager: LayoutManagerRV
