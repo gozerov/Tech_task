@@ -6,7 +6,7 @@ import ru.gozerov.data.news.cache.NewsDatabase
 
 @Entity(tableName = NewsDatabase.name)
 data class CacheNewsApi(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
 
     val source: String,

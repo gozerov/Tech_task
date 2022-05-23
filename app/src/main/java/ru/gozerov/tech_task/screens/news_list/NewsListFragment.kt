@@ -67,6 +67,7 @@ class NewsListFragment : BaseFragment<NewsListState>(), ActionListener<Int> {
                         v.visibility = View.GONE
                 }
             }
+
             is SuccessState -> {
                 binding.root.forEach { v ->
                     if (v.id == R.id.newsListRecyclerView)
@@ -83,8 +84,8 @@ class NewsListFragment : BaseFragment<NewsListState>(), ActionListener<Int> {
                         )
                     }
                 }
-
             }
+
             is ErrorState -> {
                 Log.e("ERROR_STATE", state.errorMessage)
                 binding.root.forEach { v ->

@@ -1,6 +1,7 @@
 package ru.gozerov.data.news.cache
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
@@ -10,7 +11,7 @@ import ru.gozerov.data.news.models.CacheNewsApi
 interface NewsDao {
 
     @Query("SELECT * FROM news_db")
-    fun getNews(): Flow<CacheNewsApi>
+    fun getNews(): Flow<List<CacheNewsApi>>
 
     @Query("SELECT * FROM news_db WHERE id = :id")
     suspend fun getNewsById(id: Int): CacheNewsApi
@@ -20,5 +21,8 @@ interface NewsDao {
 
     @Query("SELECT count(*) FROM news_db")
     suspend fun getNewsCount(): Int
+
+    @Query("DELETE FROM news_db")
+    suspend fun clearDatabase()
 
 }
