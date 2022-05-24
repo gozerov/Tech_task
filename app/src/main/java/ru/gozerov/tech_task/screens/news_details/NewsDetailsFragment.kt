@@ -6,10 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.flow.collect
 import ru.gozerov.core.screens.BaseFragment
@@ -17,6 +19,7 @@ import ru.gozerov.core.utils.appComponent
 import ru.gozerov.tech_task.R
 import ru.gozerov.tech_task.databinding.NewsDetailsFragmentBinding
 import ru.gozerov.tech_task.screens.news_details.NewsDetailsState.*
+import ru.gozerov.tech_task.screens.news_web.NewsWebFragment.Companion.ARG_URL
 import javax.inject.Inject
 
 class NewsDetailsFragment : BaseFragment<NewsDetailsState>() {
@@ -50,6 +53,12 @@ class NewsDetailsFragment : BaseFragment<NewsDetailsState>() {
             viewModel.viewState.collect { state ->
                 renderState(state)
             }
+        }
+        binding.goToWebButton.setOnClickListener {
+            viewModel.newsUrl?.let { url ->
+                findNavController().navigate(R.id.action_newsDetailsFragment_to_newsWebFragment, bundleOf(ARG_URL to url))
+            }
+
         }
     }
 

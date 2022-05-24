@@ -14,6 +14,8 @@ class NewsDetailsViewModel(
     private val getNewsById: GetNewsById
 ) : ViewModel() {
 
+    var newsUrl: String? = null
+
     private val _viewState: MutableStateFlow<NewsDetailsState> = MutableStateFlow(NewsDetailsState.LoadingState)
     val viewState: StateFlow<NewsDetailsState> = _viewState.asStateFlow()
 
@@ -21,6 +23,7 @@ class NewsDetailsViewModel(
         getNewsById.execute(
             args = id,
             onSuccess = { news ->
+                newsUrl = news.url
                 _viewState.tryEmit(NewsDetailsState.SuccessState(news))
             },
             onError = { e ->

@@ -1,9 +1,9 @@
 package ru.gozerov.tech_task.screens.news_list
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import ru.gozerov.core.recycler_view.ActionListener
 import ru.gozerov.core.recycler_view.BaseRecyclerViewAdapter
 import ru.gozerov.core.recycler_view.BaseViewHolder
@@ -24,8 +24,10 @@ class NewsListAdapter(
 
     override var data: List<SimpleNews> = emptyList()
         set(value) {
+            val diffUtilCallback = NewsDiffCallback(field, value)
+            val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
             field = value
-            notifyDataSetChanged()
+            diffResult.dispatchUpdatesTo(this)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<SimpleNews> {

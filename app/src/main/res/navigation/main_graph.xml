@@ -18,6 +18,14 @@
         android:id="@+id/newsDetailsFragment"
         android:name="ru.gozerov.tech_task.screens.news_details.NewsDetailsFragment"
         android:label="news_details_fragment"
-        tools:layout="@layout/news_details_fragment" />
+        tools:layout="@layout/news_details_fragment" >
+        <action
+            android:id="@+id/action_newsDetailsFragment_to_newsWebFragment"
+            app:destination="@id/newsWebFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsWebFragment"
+        android:name="ru.gozerov.tech_task.screens.news_web.NewsWebFragment"
+        android:label="NewsWebFragment" />
 
 </navigation>
