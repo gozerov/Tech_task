@@ -11,6 +11,7 @@ import androidx.core.view.forEach
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import ru.gozerov.core.recycler_view.ActionListener
 import ru.gozerov.core.recycler_view.LayoutManagerRV
@@ -20,6 +21,7 @@ import ru.gozerov.core.screens.BaseFragment
 import ru.gozerov.core.utils.appComponent
 import ru.gozerov.tech_task.R
 import ru.gozerov.tech_task.databinding.NewsListFragmentBinding
+import ru.gozerov.tech_task.screens.news_details.NewsDetailsFragment.Companion.ARG_ID
 import ru.gozerov.tech_task.screens.news_list.NewsListState.*
 import javax.inject.Inject
 
@@ -67,7 +69,6 @@ class NewsListFragment : BaseFragment<NewsListState>(), ActionListener<Int> {
                         v.visibility = View.GONE
                 }
             }
-
             is SuccessState -> {
                 binding.root.forEach { v ->
                     if (v.id == R.id.newsListRecyclerView)
@@ -82,6 +83,10 @@ class NewsListFragment : BaseFragment<NewsListState>(), ActionListener<Int> {
                             data = news,
                             layoutManager = LayoutManagerRV.LINEAR(ORIENTATION.VERTICAL)
                         )
+                        viewModel.scroll?.let {
+                            binding.newsListRecyclerView.scrollToPosition(it)
+                        }
+
                     }
                 }
             }
@@ -102,8 +107,8 @@ class NewsListFragment : BaseFragment<NewsListState>(), ActionListener<Int> {
     }
 
     override fun onClick(args: Int) {
-        findNavController().navigate(R.id.action_newsListFragment_to_newsDetailsFragment, bundleOf("ARG_ID" to args))
+        viewModel.scroll = (binding.newsListRecyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+        findNavController().navigate(R.id.action_newsListFragment_to_newsDetailsFragment, bundleOf(ARG_ID to args))
     }
-
 
 }

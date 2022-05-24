@@ -9,7 +9,7 @@ data class CacheNewsApi(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
 
-    val source: String,
+    val source: String?,
     val author: String?,
     val title: String,
     val description: String?,

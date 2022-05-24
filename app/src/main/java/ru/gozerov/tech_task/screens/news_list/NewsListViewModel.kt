@@ -18,6 +18,8 @@ class NewsListViewModel (
     private val _viewState: MutableStateFlow<NewsListState> = MutableStateFlow(LoadingState)
     val viewState: StateFlow<NewsListState> = _viewState.asStateFlow()
 
+    var scroll: Int? = null
+
     init {
         fetchNews()
     }

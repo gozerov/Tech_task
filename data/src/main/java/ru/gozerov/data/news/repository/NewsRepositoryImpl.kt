@@ -24,7 +24,8 @@ class NewsRepositoryImpl @Inject constructor (
             val news = newsRemoteService.fetchNews().articles.toCacheNewsApi()
             if (newsDao.getNewsCount()==0 || newsDao.getNews()!=news) {
                 newsDao.initializeDatabase(news)
-                return@withContext flowOf(news.toListSimpleNews())
+                val newsWithIds = newsDao.getNews()
+                return@withContext newsWithIds.map { it.toListSimpleNews() }
             } else {
                 return@withContext newsDao.getNews().map { it.toListSimpleNews() }
             }
@@ -58,17 +59,17 @@ class NewsRepositoryImpl @Inject constructor (
         SimpleNews(
             id = newsApi.id,
             title = newsApi.title,
-            content = newsApi.content
+            description = newsApi.description
         )
     }
 
     private fun CacheNewsApi.toNewsApi() = NewsApi(
-        source = this.source,
+        source = source,
         author = this.author,
         title = this.title,
         description = this.description,
         url = this.url,
-        imageUrl = this.url,
+        imageUrl = this.urlToImage,
         publishedAt = this.publishedAt,
         content = this.content
     )

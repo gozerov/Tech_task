@@ -1,5 +1,6 @@
 package ru.gozerov.tech_task.screens.news_list
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,7 @@ class NewsListAdapter(
     class ViewHolder(private val binding: ItemSimpleNewsBinding): BaseViewHolder<SimpleNews>(binding) {
         override fun bind(data: SimpleNews) {
             binding.txtTitle.text = data.title
-            binding.txtContent.text = data.content
+            binding.txtContent.text = data.description
         }
 
     }
@@ -30,12 +31,13 @@ class NewsListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<SimpleNews> {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemSimpleNewsBinding.inflate(inflater, parent, false)
+        binding.root.setOnClickListener(this)
         return ViewHolder(binding)
     }
 
     override fun onClick(view: View?) {
-        val id = (view?.tag as SimpleNews).id
-        actionListener.onClick(id)
+        val news = (view?.tag as SimpleNews)
+        actionListener.onClick(news.id)
     }
 
 }
