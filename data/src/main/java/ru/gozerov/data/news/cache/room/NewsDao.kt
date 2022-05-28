@@ -1,4 +1,4 @@
-package ru.gozerov.data.news.cache
+package ru.gozerov.data.news.cache.room
 
 import androidx.room.Dao
 import androidx.room.Delete

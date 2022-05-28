@@ -14,7 +14,7 @@ class NewsListAdapter(
     private val actionListener: ActionListener<Int>
 ): BaseRecyclerViewAdapter<SimpleNews>(), View.OnClickListener {
 
-    class ViewHolder(private val binding: ItemSimpleNewsBinding): BaseViewHolder<SimpleNews>(binding) {
+    private class ViewHolder(private val binding: ItemSimpleNewsBinding): BaseViewHolder<SimpleNews>(binding) {
         override fun bind(data: SimpleNews) {
             binding.txtTitle.text = data.title
             binding.txtContent.text = data.description

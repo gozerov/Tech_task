@@ -2,7 +2,7 @@ package ru.gozerov.data.news.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import ru.gozerov.data.news.cache.NewsDatabase
+import ru.gozerov.data.news.cache.room.NewsDatabase
 
 @Entity(tableName = NewsDatabase.name)
 data class CacheNewsApi(

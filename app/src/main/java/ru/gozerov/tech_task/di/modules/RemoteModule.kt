@@ -7,13 +7,13 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.gozerov.data.news.remote.NEWS_BASE_URL
-import ru.gozerov.data.news.remote.NewsRemoteService
+import ru.gozerov.data.news.remote.NewsRetrofit
 
 @Module
 class RemoteModule {
 
     @Provides
-    fun provideNewsRemoteService(): NewsRemoteService {
+    fun provideNewsRemoteService(): NewsRetrofit {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
@@ -27,7 +27,7 @@ class RemoteModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        return retrofit.create(NewsRemoteService::class.java)
+        return retrofit.create(NewsRetrofit::class.java)
     }
 
 }
