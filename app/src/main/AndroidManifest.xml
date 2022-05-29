@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Tech_task"
         android:name=".app.NewsApp">
         <activity
-            android:name=".activity.MainActivity"
+            android:name="ru.gozerov.presentation.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Tech_task</string>
+    <string name="text_on_error_state_1">Какой-то сверхразум все сломал</string>
+    <string name="text_on_error_state_2">Постараемся быстро починить</string>
+    <string name="try_again">Попробовать снова</string>
+    <string name="to_news">to news</string>
+</resources>

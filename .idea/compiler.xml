@@ -4,6 +4,7 @@
     <bytecodeTargetLevel target="1.7">
       <module name="Tech_task.app" target="11" />
       <module name="Tech_task.data" target="11" />
+      <module name="Tech_task.presentation" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

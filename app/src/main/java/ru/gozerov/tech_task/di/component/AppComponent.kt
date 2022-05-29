@@ -4,8 +4,8 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import ru.gozerov.tech_task.di.modules.AppModule
-import ru.gozerov.tech_task.screens.news_details.NewsDetailsFragment
-import ru.gozerov.tech_task.screens.news_list.NewsListFragment
+import ru.gozerov.presentation.screens.news_details.NewsDetailsFragment
+import ru.gozerov.presentation.screens.news_list.NewsListFragment
 import javax.inject.Singleton
 
 @Singleton
